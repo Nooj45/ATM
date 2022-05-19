@@ -99,7 +99,7 @@ public class User{
 	 * @return:             the UUID of the account
 	 */
     public String getAcctUUID(int acctIdx){
-        return this.accounts.get(acctIdx).getUUid();
+        return this.accounts.get(acctIdx).getUUID();
     }
 
     /**

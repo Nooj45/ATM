@@ -64,9 +64,9 @@ public class User{
      * Get user ID
      * @return:             the uuid
      */
-     public String getUUID(){
-         return this.uuid;
-     }
+    public String getUUID(){
+        return this.uuid;
+    }
 
     /**
 	 * Add an account for the user.
@@ -109,4 +109,45 @@ public class User{
     public void printAcctTransHistory(int acctIdx){
         this.accounts.get(acctIdx).printTransHistory();
     }
+
+    /**
+	 * Add a transaction to a particular account.
+	 * @param acctIdx:	    the index of the account
+	 * @param amount:	    the amount of the transaction
+	 * @param memo:     	the memo of the transaction
+	 */
+	public void addAcctTransaction(int acctIdx, double amount, String memo){
+		this.accounts.get(acctIdx).addTransaction(amount, memo);
+	}
+	
+	/**
+	 * Check whether a given pin matches the true User pin
+	 * @param aPin:     	the pin to check
+	 * @return:     		whether the pin is valid or not
+	 */
+	public boolean validatePin(String aPin){
+		
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			return MessageDigest.isEqual(md.digest(aPin.getBytes()), this.pinHash);
+		} catch (Exception e) {
+			System.err.println("Error, caught exeption : " + e.getMessage());
+			System.exit(1);
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Print summaries for the accounts of this user.
+	 */
+	public void printAccountsSummary(){
+		
+		System.out.printf("\n\n%s's accounts summary\n", this.firstName);
+		for (int a = 0; a < this.accounts.size(); a++) {
+			System.out.printf("%d) %s\n", a+1, 
+					this.accounts.get(a).getSummaryLine());
+		}
+		System.out.println();
+	}
 }

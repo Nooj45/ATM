@@ -20,6 +20,19 @@ public class Bank{
 	private ArrayList<Account> accounts;
 
 	/**
+	 * Create a new Bank object with empty lists of users and accounts.
+	 */
+	public Bank(String name){
+		
+		this.name = name;
+		
+		// init users and accounts
+		users = new ArrayList<User>();
+		accounts = new ArrayList<Account>();
+		
+	}
+
+	/**
 	 * Generate a new universally unique ID for a user.
 	 * @return:				the new unique uuid
 	 */
@@ -106,14 +119,6 @@ public class Bank{
 		this.accounts.add(newAccount);
 		
 		return newUser;
-	}
-
-	/**
-	 * Add an existing account for a particular User.
-	 * @param newAccount	the account
-	 */
-	public void addAccount(Account newAccount){
-		this.accounts.add(newAccount);
 	}
 	
 	/**
